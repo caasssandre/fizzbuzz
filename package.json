@@ -1,0 +1,25 @@
+{
+  "name": "fizzbuzz",
+  "version": "1.0.0",
+  "description": "Solving the classic fizzbuzz problem",
+  "main": "functions.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "jest --watchAll"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/caasssandre/fizzbuzz.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/caasssandre/fizzbuzz/issues"
+  },
+  "homepage": "https://github.com/caasssandre/fizzbuzz#readme",
+  "dependencies": {
+    "jest": "^24.9.0"
+  }
+}
