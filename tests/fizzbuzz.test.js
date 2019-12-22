@@ -1,10 +1,13 @@
 const {fizzbuzz} = require('../functions')
 
-const fizzbuzzed = fizzbuzz()
+// these tests are executed using jest
 
-test('tests are working', ()=>{
-  expect(2).toEqual(2)
-})
+let oldLog = console.log // storing the old console.log function
+oldLog('Careful, console.log has been overridden in this test suite, please use oldLog instead.')
+const consoleOutputs = []
+console.log = variable => {
+  consoleOutputs.push(variable)
+}
 
 test('function fizzbuzz exists', ()=>{
   const expected = "function"
@@ -12,46 +15,43 @@ test('function fizzbuzz exists', ()=>{
   expect(actual).toEqual(expected)
 })
 
-test('fizzbuzz returns an array of length 100', ()=>{
-  const expected = 100
-  const actual = fizzbuzzed.length
-  expect(actual).toEqual(expected)
-})
-
-test('the last element of the array is Buzz', ()=>{
-  const expected = "Buzz"
-  const actual = fizzbuzzed[fizzbuzzed.length-1]
-  expect(actual).toEqual(expected)
-})
-
-test('the element at position 2 is equal to fizz', ()=>{
-  const expected = "Fizz"
-  const actual = fizzbuzzed[2]
-  expect(actual).toEqual(expected)
-})
-
-test('the element at position 4 is equal to buzz', ()=>{
-  const expected = "Buzz"
-  const actual = fizzbuzzed[4]
-  expect(actual).toEqual(expected)
-})
-
-test('the element at position 14 is equal to FizzBuzz', ()=>{
-  const expected = "FizzBuzz"
-  const actual = fizzbuzzed[14]
-  expect(actual).toEqual(expected)
-})
-
-test('the element at position 15 is equal to 16', ()=>{
-  const expected = 16
-  const actual = fizzbuzzed[15]
-  expect(actual).toEqual(expected)
-})
-
-test('the element at position 29 is equal to FizzBuzz', ()=>{
-  const expected = "FizzBuzz"
-  const actual = fizzbuzzed[29]
-  expect(actual).toEqual(expected)
-})
-
 fizzbuzz()
+
+test('fizzbuzz invokes console.log 100 times', ()=>{
+  const expected = 100
+  const actual = consoleOutputs.length
+  expect(actual).toEqual(expected)
+})
+
+test('numbers divisible by 3 but not by 5 console.log Fizz', ()=>{
+  for(let i=0; i<consoleOutputs.length; i++){
+    if((i+1)%3 == 0 && (i+1)%5 !=0){
+        expect(consoleOutputs[i]).toEqual('Fizz')
+    }
+  }
+})
+
+test('numbers divisible by 5 but not by 3 console.log Buzz', ()=>{
+  for(let i=0; i<consoleOutputs.length; i++){
+    if((i+1)%5 == 0 && (i+1)%3 !=0){
+        expect(consoleOutputs[i]).toEqual('Buzz')
+    }
+  }
+})
+
+test('numbers divisible by 5 and by 3 console.log FizzBuzz', ()=>{
+  for(let i=0; i<consoleOutputs.length; i++){
+    if((i+1)%5 == 0 && (i+1)%3 ==0){
+        expect(consoleOutputs[i]).toEqual('FizzBuzz')
+    }
+  }
+})
+
+test('numbers not divisible by 5 nor by 3 console.log the number', ()=>{
+  for(let i=0; i<consoleOutputs.length; i++){
+    if((i+1)%5 != 0 && (i+1)%3 !=0){
+        expect(consoleOutputs[i]).toEqual(i+1)
+    }
+  }
+})
+
