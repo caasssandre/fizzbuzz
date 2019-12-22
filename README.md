@@ -2,11 +2,9 @@
 
 Solving the classic fizzbuzz problem
 
-# Instructions
+## Instructions
 
-In order to run the test suite:
-
----
+### In order to run the test suite:
 
 * clone the repository
 * on the command line run the following:
